@@ -1,4 +1,4 @@
-const ALLOWED_ORIGIN = "https://simonbernard2.github.io";
+const ALLOWED_ORIGIN = "https://simonbernard.ca";
 const TO_EMAIL = "info@simonbernard.ca";
 
 function corsHeaders() {
@@ -11,6 +11,10 @@ function corsHeaders() {
 
 function escapeHtml(str) {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function sanitizeHeaderValue(str) {
+  return str.replace(/[\r\n<>,"]/g, "").trim();
 }
 
 export default {
@@ -59,7 +63,7 @@ export default {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Simon Bernard Magicien <contact@contact.simonbernard.ca>",
+        from: `${sanitizeHeaderValue(name)} via simonbernard.ca <contact@contact.simonbernard.ca>`,
         to: TO_EMAIL,
         reply_to: email,
         subject: `Demande de réservation — ${name}`,

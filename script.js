@@ -1,4 +1,5 @@
 const WORKER_URL = "https://contact.simonbernard.workers.dev";
+const SITEVERIFY_URL = "https://turnstile-siteverify-simonbernard-ca.simonbernard.workers.dev";
 
 const form = document.getElementById("contact-form");
 const status = document.getElementById("form-status");
@@ -18,6 +19,18 @@ form.addEventListener("submit", async (e) => {
   status.className = "";
 
   try {
+    const token = form.querySelector('[name="cf-turnstile-response"]').value;
+    const verifyResponse = await fetch(SITEVERIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token }),
+    });
+    const verifyData = await verifyResponse.json();
+
+    if (!verifyData.success) {
+      throw new Error("Verification failed");
+    }
+
     const response = await fetch(WORKER_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
