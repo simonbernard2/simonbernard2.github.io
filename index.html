@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simon Bernard — Magicien</title>
+  <meta name="description" content="Simon Bernard, magicien professionnel disponible pour événements corporatifs, soirées privées et spectacles de scène." />
+  <meta property="og:title" content="Simon Bernard — Magicien" />
+  <meta property="og:description" content="Magie professionnelle pour tous vos événements. Contactez-nous pour une réservation." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <div class="card">
+      <div class="branding">
+        <h1>Simon Bernard</h1>
+        <p class="subtitle">Magicien</p>
+      </div>
+
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Votre nom" required />
+        <input type="email" name="email" placeholder="Votre courriel" required />
+        <textarea name="message" placeholder="Décrivez votre événement..." rows="6" required></textarea>
+        <button type="submit">Envoyer le message</button>
+        <p id="form-status" role="status"></p>
+      </form>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
