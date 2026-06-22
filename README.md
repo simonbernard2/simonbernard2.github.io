@@ -17,22 +17,28 @@ The contact form posts to a Cloudflare Worker (`worker/contact.js`), which sends
 ### Deploying the worker
 
 1. Install [wrangler](https://developers.cloudflare.com/workers/wrangler/) and log in:
+
    ```bash
    npm install -g wrangler
    wrangler login
    ```
+
 2. Set the Resend API key as a secret (from `worker/`):
+
    ```bash
    cd worker
    wrangler secret put RESEND_API_KEY
    ```
+
 3. Deploy:
+
    ```bash
    wrangler deploy
    ```
+
 4. Update `WORKER_URL` in `script.js` to match the deployed Worker URL, and `ALLOWED_ORIGIN` in `worker/contact.js` to match the GitHub Pages origin.
 
-Note: the `from` address in `worker/contact.js` (`contact@simonbernard.ca`) must be on a domain verified in your Resend account, or sending will fail.
+Note: the `from` address in `worker/contact.js` (`contact@contact.simonbernard.ca`) must be on a domain verified in your Resend account, or sending will fail.
 
 ## Deploying to GitHub Pages
 
