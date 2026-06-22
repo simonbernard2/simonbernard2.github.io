@@ -1,8 +1,9 @@
 const WORKER_URL = "https://contact.simonbernard.workers.dev";
-const SITEVERIFY_URL = "https://turnstile-siteverify-simonbernard-ca.simonbernard.workers.dev";
+const SITEVERIFY_URL =
+  "https://turnstile-siteverify-simonbernard-ca.simonbernard.workers.dev";
 
 const form = document.getElementById("contact-form");
-const status = document.getElementById("form-status");
+const formStatus = document.getElementById("form-status");
 const submitButton = form.querySelector("button");
 
 let turnstileVerified = false;
@@ -33,8 +34,8 @@ form.addEventListener("submit", async (e) => {
   };
 
   submitButton.disabled = true;
-  status.textContent = "Envoi en cours...";
-  status.className = "";
+  formStatus.textContent = "Envoi en cours...";
+  formStatus.className = "";
 
   try {
     const token = form.querySelector('[name="cf-turnstile-response"]').value;
@@ -59,12 +60,12 @@ form.addEventListener("submit", async (e) => {
       throw new Error("Request failed");
     }
 
-    status.textContent = "Message envoyé. Merci!";
-    status.className = "success";
+    formStatus.textContent = "Message envoyé. Merci!";
+    formStatus.className = "success";
     form.reset();
   } catch (err) {
-    status.textContent = "Une erreur est survenue. Veuillez réessayer.";
-    status.className = "error";
+    formStatus.textContent = "Une erreur est survenue. Veuillez réessayer.";
+    formStatus.className = "error";
   } finally {
     turnstile.reset();
     turnstileVerified = false;
