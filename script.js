@@ -3,11 +3,29 @@ const SITEVERIFY_URL = "https://turnstile-siteverify-simonbernard-ca.simonbernar
 
 const form = document.getElementById("contact-form");
 const status = document.getElementById("form-status");
+const submitButton = form.querySelector("button");
+
+let turnstileVerified = false;
+
+function updateSubmitButton() {
+  submitButton.disabled = !turnstileVerified || !form.checkValidity();
+}
+
+window.onTurnstileSuccess = () => {
+  turnstileVerified = true;
+  updateSubmitButton();
+};
+
+window.onTurnstileExpired = () => {
+  turnstileVerified = false;
+  updateSubmitButton();
+};
+
+form.addEventListener("input", updateSubmitButton);
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const submitButton = form.querySelector("button");
   const data = {
     name: form.name.value,
     email: form.email.value,
@@ -48,6 +66,8 @@ form.addEventListener("submit", async (e) => {
     status.textContent = "Une erreur est survenue. Veuillez réessayer.";
     status.className = "error";
   } finally {
-    submitButton.disabled = false;
+    turnstile.reset();
+    turnstileVerified = false;
+    updateSubmitButton();
   }
 });

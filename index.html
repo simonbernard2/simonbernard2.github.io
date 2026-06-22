@@ -26,8 +26,17 @@
         <input type="text" name="name" placeholder="Votre nom" required />
         <input type="email" name="email" placeholder="Votre courriel" required />
         <textarea name="message" placeholder="Décrivez votre événement..." rows="6" required></textarea>
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAADpO88hxLlGr4H51" data-action="turnstile-spin-v1" data-theme="light" data-size="flexible"></div>
-        <button type="submit">Envoyer le message</button>
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAADpO88hxLlGr4H51"
+          data-action="turnstile-spin-v1"
+          data-theme="light"
+          data-size="flexible"
+          data-callback="onTurnstileSuccess"
+          data-expired-callback="onTurnstileExpired"
+          data-error-callback="onTurnstileExpired"
+        ></div>
+        <button type="submit" disabled>Envoyer le message</button>
         <p id="form-status" role="status"></p>
       </form>
     </div>
