@@ -92,6 +92,10 @@ textarea {
   resize: none;
 }
 
+.cf-turnstile {
+  width: 100%;
+}
+
 button {
   margin-top: 0.5rem;
   border: 1px solid #171717;
